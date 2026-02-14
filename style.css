@@ -21,8 +21,11 @@ body{
 h1{
      font-family: "Science Gothic", sans-serif;
      font-weight: 700;
-     
-
+}
+.inputs{
+    border-radius: 30px;
+    border: none;
+    padding: 5px;
 }
 
 
