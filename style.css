@@ -29,7 +29,7 @@ h1{
      border: none;
      padding: 5px;
 }
-.btn{
+#btn{
  background-color:rgba(255, 255, 255, 0.6);
  backdrop-filter: blur(10px);
  padding: 5px;
@@ -39,9 +39,12 @@ h1{
   font-size: 1rem;
 
 }
-.btn:hover{
+#btn:hover{
     background-color: #6e6b6b;
     color: white;
+}
+#count{
+    font-size: 30px;
 }
 
 
