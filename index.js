@@ -11,44 +11,36 @@ const taskList= document.getElementById("task-list");
 let count = Number(span.textContent);
 
 
-
+const toggleEmptyState=() =>{
+    taskImage.style.display=taskList.children.length === 0 ? "display":"none";
+}
 
 function handleClick(){
+     
+
      if(!inputField.value){
         count=0;
         alert("Please add a task");
-        taskBox.classList.add("hidden");
+        
         return;
      }
+     
      count ++;
     const li=document.createElement("li");
+      
+     li.innerHTML =`
+        <input type="checkbox" class="checkbox">
+        <span> ${inputField.value}</span> `;
+
+
      li.textContent=inputField.value;
      taskList.appendChild(li);
      inputField.value="";
 
      displayText.textContent=`Your current tasks 0/${count}`;
+     toggleEmptyState();
     } 
 
-
-
-/*addButton.addEventListener("click", function () {
-    if(!inputField.value){
-        
-        alert("Please add a task");
-        taskBox.classList.add("hidden");
-        return ;
-    }
-    
-    const li=document.createElement("li");
-    li.textContent=inputField.value;
-    taskList.appendChild(li);
-    inputField.value="";
-
-   // addedTask=inputField.value;
-    //taskDisplay.textContent=addedTask;
-    //inputField.value="";  
-
-}); */
 
 addButton.addEventListener("click",handleClick);
 inputField.addEventListener("keypress",(e)=>{
@@ -56,5 +48,3 @@ inputField.addEventListener("keypress",(e)=>{
         handleClick(e);
     }
 });
-
-
