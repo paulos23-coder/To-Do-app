@@ -144,7 +144,13 @@ background:rgba(255, 194, 209, 0.3);
     transition: all 0.2s ease;
     cursor: pointer;
 }
-.task-button button:hover{
-    transform: scale(10px);
+.task-button button:hover{ 
+    transform: scale(1.2);
     background-color: #6e6b6b;
+}
+.task-button .edit-btn{
+    background-color: rgba(255, 217, 0, 0.547);
+}
+.task-button .delete-btn{
+    background-color:rgba(255, 0, 0, 0.553) ;
 }
