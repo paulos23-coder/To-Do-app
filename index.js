@@ -8,12 +8,16 @@ const taskDisplay=document.getElementById("task");
 const taskBox=document.querySelector("#task");
 const taskImage=document.querySelector(".emptyImage");
 const taskList= document.getElementById("task-list");
+const todoContainer=document.querySelector(".todos-container");
 let count = Number(span.textContent);
 
 
 const toggleEmptyState=() =>{
-    taskImage.style.display=taskList.children.length === 0 ? "display":"none";
+    taskImage.style.display=taskList.children.length === 0 ? "block":"none";
+    todoContainer.style.width=taskList.children.length > 0 ? "100%" : "50%";
+
 }
+
 
 function handleClick(){
      
@@ -24,7 +28,7 @@ function handleClick(){
         
         return;
      }
-     
+      
      count ++;
     const li=document.createElement("li");
       
@@ -39,13 +43,20 @@ function handleClick(){
         </div>   
         `;
 
+       li.querySelector(".delete-btn").addEventListener("click", () =>{
+        li.remove();
+        toggleEmptyState();
+     });    
+     
 
-    
      taskList.appendChild(li);
+
      inputField.value="";
 
      displayText.textContent=`Your current tasks 0/${count}`;
      toggleEmptyState();
+     
+      
     } 
 
 
