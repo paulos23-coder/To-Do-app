@@ -29,11 +29,11 @@ function handleClick(){
     const li=document.createElement("li");
       
      li.innerHTML =`
-        <input type="checkbox" class="checkbox">
+        <input type="checkbox" class="checkboz">
         <span> ${inputField.value}</span> `;
 
 
-     li.textContent=inputField.value;
+    
      taskList.appendChild(li);
      inputField.value="";
 
