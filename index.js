@@ -42,7 +42,15 @@ function handleClick(){
             class="fa-solid fa-trash"></i></button>
         </div>   
         `;
+        const checkbox=li.querySelector(".checkboz");
+      const editBtn=li.querySelector(".edit-btn");
+      editBtn.addEventListener("click", () => {
+        if(!checkbox.checked){
+            inputField.value=li.querySelector("span").textContent;
+            li.remove();
+        }   
 
+      });
        li.querySelector(".delete-btn").addEventListener("click", () =>{
         li.remove();
         toggleEmptyState();
