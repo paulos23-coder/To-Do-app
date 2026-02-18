@@ -30,7 +30,14 @@ function handleClick(){
       
      li.innerHTML =`
         <input type="checkbox" class="checkboz">
-        <span> ${inputField.value}</span> `;
+        <span> ${inputField.value}</span> 
+        <div class="task-button">
+            <button class="edit-btn"><i
+            class="fa-solid fa-pen"></i></button>
+            <button class="delete-btn"><i
+            class="fa-solid fa-trash"></i></button>
+        </div>   
+        `;
 
 
     
