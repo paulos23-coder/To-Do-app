@@ -10,16 +10,17 @@ const taskImage=document.querySelector(".emptyImage");
 const taskList= document.getElementById("task-list");
 const todoContainer=document.querySelector(".todos-container");
 let count = Number(span.textContent);
+count =0;
 
-
+//Function previews no task image when taskbar is empty
 const toggleEmptyState=() =>{
     taskImage.style.display=taskList.children.length === 0 ? "block":"none";
-    todoContainer.style.width=taskList.children.length > 0 ? "100%" : "50%";
+   
 
 }
 
 
-function handleClick(){
+function handleClick(a)  {
      
 
      if(!inputField.value){
@@ -33,7 +34,7 @@ function handleClick(){
     const li=document.createElement("li");
       
      li.innerHTML =`
-        <input type="checkbox" class="checkboz">
+        <input type="checkbox" class="checkboz"/>
         <span> ${inputField.value}</span> 
         <div class="task-button">
             <button class="edit-btn"><i
@@ -43,28 +44,43 @@ function handleClick(){
         </div>   
         `;
         const checkbox=li.querySelector(".checkboz");
-      const editBtn=li.querySelector(".edit-btn");
-      editBtn.addEventListener("click", () => {
+        const editBtn=li.querySelector(".edit-btn");
+        const deleteBtn=li.querySelector(".delete-btn");
+       
+        //Checks if a task is completed and disable edit button
+        checkbox.addEventListener("change", ()=>{
+            const isChecked=checkbox.checked;
+            li .classList.toggle("completed", isChecked);
+            editBtn.disabled=isChecked;
+            editBtn.style.opacity=isChecked ? "0.5" : "1";
+            editBtn.style.pointerEvents= isChecked ? "none" : "auto";
+        });
+          
+        //Edit task button
+        editBtn.addEventListener("click", () => {
         if(!checkbox.checked){
             inputField.value=li.querySelector("span").textContent;
             li.remove();
+            toggleEmptyState();
         }   
 
       });
-       li.querySelector(".delete-btn").addEventListener("click", () =>{
+        
+        //Delete task button
+        deleteBtn.addEventListener("click", () =>{
         li.remove();
         toggleEmptyState();
-     });    
+       
+
+     }); 
+    
      
 
      taskList.appendChild(li);
-
      inputField.value="";
 
      displayText.textContent=`Your current tasks 0/${count}`;
-     toggleEmptyState();
-     
-      
+     toggleEmptyState();   
     } 
 
 
@@ -74,3 +90,4 @@ inputField.addEventListener("keypress",(e)=>{
         handleClick(e);
     }
 });
+
