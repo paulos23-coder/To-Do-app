@@ -79,6 +79,7 @@ function handleClick(checkCompletion = true )  {
         deleteBtn.addEventListener("click", () =>{
         li.remove();
         toggleEmptyState();
+         updateProgress();
      }); 
     
      taskList.appendChild(li);
