@@ -14,13 +14,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
      <div class="todo">
          <h1>To-Do App</h1>
-         <p id="displayText">Your current tasks <span id="taskNo">0</span></p>
+         <div class="stat-container">
+            <div class="details">
+                <h3>Keep it Up!👌</h3>
+                <div id="progressBar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+            <div class="stat-number">
+                <p id="number">0/0</p>
+            </div>
+         </div>
+        
          <input type="text"  id="inputs" type="text" placeholder="Add new task..." autofocus autocomplete="off">
           <button type="submit"  id="btn">+</button>
          <div class="todos-container">

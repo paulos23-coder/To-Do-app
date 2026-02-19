@@ -1,16 +1,12 @@
 const displayCount=document.getElementById("count");
 const addButton=document.getElementById("btn");
-const displayText=document.getElementById("displayText");
-const span=document.getElementById("taskNo");
 const inputField=document.getElementById("inputs");
 const taskDisplay=document.getElementById("task");
-
 const taskBox=document.querySelector("#task");
 const taskImage=document.querySelector(".emptyImage");
 const taskList= document.getElementById("task-list");
 const todoContainer=document.querySelector(".todos-container");
-let count = Number(span.textContent);
-count =0;
+
 
 //Function previews no task image when taskbar is empty
 const toggleEmptyState=() =>{
@@ -21,18 +17,18 @@ const toggleEmptyState=() =>{
 
 
 function handleClick(a)  {
-     
-
+  // Previews alert when task is not added
      if(!inputField.value){
-        count=0;
+
         alert("Please add a task");
         
         return;
      }
       
-     count ++;
+     
     const li=document.createElement("li");
       
+    //Creates a list element in the html for the added task i
      li.innerHTML =`
         <input type="checkbox" class="checkboz"/>
         <span> ${inputField.value}</span> 
@@ -70,20 +66,16 @@ function handleClick(a)  {
         deleteBtn.addEventListener("click", () =>{
         li.remove();
         toggleEmptyState();
-       
-
      }); 
     
-     
-
      taskList.appendChild(li);
      inputField.value="";
 
-     displayText.textContent=`Your current tasks 0/${count}`;
+     
      toggleEmptyState();   
     } 
 
-
+//Add a task when add button is pressed and also when Enter key is pressed.
 addButton.addEventListener("click",handleClick);
 inputField.addEventListener("keypress",(e)=>{
     if(e.key==="Enter"){
