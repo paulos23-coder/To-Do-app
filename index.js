@@ -20,12 +20,18 @@ const toggleEmptyState=() =>{
 const updateProgress = (checkCompletion = true )=>{
     const totalTasks=taskList.children.length;
     const completeTask=taskList.querySelectorAll(".checkboz:checked").length;
-    console.log(completeTask.length);
+    console.log(completeTask);
 
     progressBar.style.width = totalTasks ? `${(completeTask / totalTasks) * 100}% ` :
     "0%";
     progressNumber.textContent = `${(completeTask )}/ ${(totalTasks )} `;
-}
+
+    if(checkCompletion && totalTasks > 0 && 
+        completeTask === totalTasks){
+            confettiCelebrate();
+        }
+
+};
 
 
 function handleClick(checkCompletion = true )  {
@@ -84,8 +90,8 @@ function handleClick(checkCompletion = true )  {
     
      taskList.appendChild(li);
      inputField.value="";
+     updateProgress(checkCompletion);
 
-     
      toggleEmptyState();   
     } 
 
@@ -97,4 +103,11 @@ inputField.addEventListener("keypress",(e)=>{
     }
 });
 
-
+// Confetti explosion for task completion
+const confettiCelebrate = () => {
+    confetti({
+        particleCount: 200,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+};
