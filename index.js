@@ -17,6 +17,7 @@ const toggleEmptyState=() =>{
    
 
 }
+//updating progress function 
 const updateProgress = (checkCompletion = true )=>{
     const totalTasks=taskList.children.length;
     const completeTask=taskList.querySelectorAll(".checkboz:checked").length;
@@ -32,24 +33,42 @@ const updateProgress = (checkCompletion = true )=>{
         }
 
 };
+// Function to store in browser storage
+const saveToLocalStorage = () =>{
+    const Tasks = Array.from(taskList.querySelectorAll("li")).map(li => ({
+        text:li.querySelector("span").textContent,
+        completed: li.querySelector(".checkboz").checked
+    }));
+    localStorage.setItem("Tasks",JSON.stringify(Tasks));
+};
+//Loads a previous saved task
+const loadFromLocalStorage = () => {
+    const savedTask = JSON.parse(localStorage.getItem("Tasks")) || [];
 
+    savedTask.forEach(task => {
+        handleClick(false, task);
+    });
 
-function handleClick(checkCompletion = true )  {
+    updateProgress(false);
+};
+
+function handleClick(checkCompletion = true , taskData=null)  {
   // Previews alert when task is not added
-     if(!inputField.value){
+     if(!inputField.value && !taskData){
 
         alert("Please add a task");
         
         return;
      }
-      
+     // loadFromLocalStorage();
      
     const li=document.createElement("li");
       
     //Creates a list element in the html for the added task i
+    const taskText = taskData ? taskData.text : inputField.value;
      li.innerHTML =`
         <input type="checkbox" class="checkboz"/>
-        <span> ${inputField.value}</span> 
+        <span> ${taskText}</span> 
         <div class="task-button">
             <button class="edit-btn"><i
             class="fa-solid fa-pen"></i></button>
@@ -60,6 +79,11 @@ function handleClick(checkCompletion = true )  {
         const checkbox=li.querySelector(".checkboz");
         const editBtn=li.querySelector(".edit-btn");
         const deleteBtn=li.querySelector(".delete-btn");
+              //If this task came from storage AND it was completed before…
+             if (taskData && taskData.completed) {
+                  checkbox.checked = true;
+                  li.classList.add("completed");
+                }
        
         //Checks if a task is completed and disable edit button
         checkbox.addEventListener("change", ()=>{
@@ -69,6 +93,7 @@ function handleClick(checkCompletion = true )  {
             editBtn.style.opacity=isChecked ? "0.5" : "1";
             editBtn.style.pointerEvents= isChecked ? "none" : "auto";
              updateProgress();
+             saveToLocalStorage();
         });
           
         //Edit task button
@@ -77,8 +102,9 @@ function handleClick(checkCompletion = true )  {
             inputField.value=li.querySelector("span").textContent;
             li.remove();
             toggleEmptyState();
+            saveToLocalStorage();
         }   
-
+            
       });
         
         //Delete task button
@@ -86,13 +112,21 @@ function handleClick(checkCompletion = true )  {
         li.remove();
         toggleEmptyState();
          updateProgress();
+         saveToLocalStorage();
      }); 
     
      taskList.appendChild(li);
+
+     
+    if (!taskData) {
+        inputField.value = "";
+    }
+
      inputField.value="";
      updateProgress(checkCompletion);
 
-     toggleEmptyState();   
+     toggleEmptyState();  
+     saveToLocalStorage(); 
     } 
 
 //Add a task when add button is pressed and also when Enter key is pressed.
@@ -111,3 +145,4 @@ const confettiCelebrate = () => {
         origin: { y: 0.6 }
     });
 };
+document.addEventListener("DOMContentLoaded", loadFromLocalStorage);
