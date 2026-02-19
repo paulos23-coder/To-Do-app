@@ -6,7 +6,10 @@ const taskBox=document.querySelector("#task");
 const taskImage=document.querySelector(".emptyImage");
 const taskList= document.getElementById("task-list");
 const todoContainer=document.querySelector(".todos-container");
-
+//progress bar
+const progress=document.getElementById("progressBar");
+const progressBar=document.getElementById("progress");
+const progressNumber=document.getElementById("number");
 
 //Function previews no task image when taskbar is empty
 const toggleEmptyState=() =>{
@@ -14,9 +17,18 @@ const toggleEmptyState=() =>{
    
 
 }
+const updateProgress = (checkCompletion = true )=>{
+    const totalTasks=taskList.children.length;
+    const completeTask=taskList.querySelectorAll(".checkboz:checked").length;
+    console.log(completeTask.length);
+
+    progressBar.style.width = totalTasks ? `${(completeTask / totalTasks) * 100}% ` :
+    "0%";
+    progressNumber.textContent = `${(completeTask )}/ ${(totalTasks )} `;
+}
 
 
-function handleClick(a)  {
+function handleClick(checkCompletion = true )  {
   // Previews alert when task is not added
      if(!inputField.value){
 
@@ -50,6 +62,7 @@ function handleClick(a)  {
             editBtn.disabled=isChecked;
             editBtn.style.opacity=isChecked ? "0.5" : "1";
             editBtn.style.pointerEvents= isChecked ? "none" : "auto";
+             updateProgress();
         });
           
         //Edit task button
@@ -82,4 +95,5 @@ inputField.addEventListener("keypress",(e)=>{
         handleClick(e);
     }
 });
+
 
